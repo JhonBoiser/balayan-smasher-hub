@@ -6,7 +6,15 @@
   <title>Balayan Smasher Hub</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
     .navbar {
       background-color: #18c261ff;
     }
@@ -14,12 +22,17 @@
     .navbar .navbar-brand,
     .navbar .btn {
       color: #fff !important;
-      font-weight: bold;
+      font-weight: 600;
       transition: all 0.3s ease;
     }
     .navbar .nav-link:hover {
       color: #000 !important;
       transform: scale(1.1);
+    }
+    .navbar .btn {
+      font-weight: 500;
+      border-radius: 25px;
+      padding: 6px 16px;
     }
     .navbar .btn:hover {
       background-color: #fff !important;
@@ -36,15 +49,19 @@
       position: absolute;
       bottom: 70px;
       left: 40px;
-      font-size: 2.5rem;
-      font-weight: bold;
+      font-size: 2.8rem;
+      font-weight: 700;
       color: white;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
       transition: transform 0.4s ease, color 0.4s ease;
     }
     .banner-text:hover {
       transform: scale(1.05);
       color: #18c261ff;
+    }
+    input.form-control {
+      font-size: 0.95rem;
+      padding: 6px 14px;
     }
   </style>
 </head>
@@ -52,7 +69,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="{{ asset('images/imageslogo.jpg') }}" alt="Logo" style="height:50px; margin-top: 2px;">
+        <img src="{{ asset('images/imageslogo.jpg') }}" alt="Logo" style="height:50px; margin-top: 2px; border-radius: 50%">
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
