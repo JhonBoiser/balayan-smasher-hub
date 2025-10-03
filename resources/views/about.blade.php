@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balayan Smasher Hub </title>
+    <title>Balayan Smasher Hub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -15,15 +16,16 @@
             --nike-accent: #ff6b00;
             --nike-green: #0cad3aff
         }
-        
-        html, body {
+
+        html,
+        body {
             height: 100%;
             margin: 0;
             font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
-        #search{
-            background-color:var(--nike-green);
+        #search {
+            background-color: var(--nike-green);
             border: none;
             color: white;
         }
@@ -85,17 +87,18 @@
             height: 2px;
             left: 0;
             bottom: -5px;
-            background-color: var(--nike-black);
+            background-color: var(--nike-green);
             transition: width 0.3s ease;
         }
 
         .navbar .nav-link:hover {
-            color: var(--nike-accent);
+            color: var(--nike-green);
+            transform: scale(1.05);
         }
 
         .navbar .nav-link:hover::after {
             width: 100%;
-            background-color: var(--nike-accent);
+            background-color: var(--nike-green);
         }
 
         .navbar .form-control::placeholder {
@@ -136,275 +139,267 @@
             transform: scale(1.05);
         }
 
-        #menGrid {
+        .mega-menu {
             position: absolute;
-            top: 0; 
+            top: 60px;
             left: 0;
-            width: 100vw;
-            background: var(--nike-white);
-            z-index: 20;
-            display: none;
-            overflow-y: auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* Nike-style Category Navigation */
-        .category-nav {
-            background-color: var(--nike-light-gray);
-            border-bottom: 1px solid #e5e5e5;
-        }
-        
-        .category-nav .nav-link {
-            color: var(--nike-gray);
-            font-weight: 500;
-            padding: 15px 20px;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .category-nav .nav-link:hover,
-        .category-nav .nav-link.active {
-            color: var(--nike-black);
-            border-bottom-color: var(--nike-black);
-        }
-
-        /* Product Grid Styles */
-        .product-grid {
-            padding: 30px 0;
-        }
-        
-        .product-card {
-            background: var(--nike-white);
-            border-radius: 0;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .product-image-container {
-            position: relative;
-            overflow: hidden;
-            background-color: var(--nike-light-gray);
-        }
-        
-        .product-image {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+            background: #fff;
+            display: none;
+            padding: 20px 40px;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-height: 70vh;
+            overflow-y: auto;
+            /* Add animation properties */
+            animation: popUp 0.4s ease-out forwards;
+            transform-origin: top center;
         }
-        
-        .product-card:hover .product-image {
+
+        .mega-menu h6 {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--nike-black);
+        }
+
+        .mega-menu a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            display: inline-block;
+            /* Change to inline-block */
+            padding: 5px 0;
+            transition: all 0.3s ease;
+            position: relative;
+
+        }
+
+        .mega-menu a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--nike-green);
+            transition: width 0.3s ease;
+        }
+
+        .mega-menu a:hover {
+            color: var(--nike-green);
             transform: scale(1.05);
         }
-        
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--nike-accent);
-            color: white;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
+
+        .mega-menu a:hover::after {
+            width: 100%;
+            /* This will now match the text length */
         }
-        
-        .product-info {
-            padding: 15px;
-        }
-        
-        .product-brand {
-            font-size: 0.9rem;
-            color: var(--nike-gray);
-            margin-bottom: 5px;
-        }
-        
-        .product-title {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--nike-black);
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-        
-        .product-price {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--nike-black);
-        }
-        
-        .product-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .btn-add-to-cart {
-            background-color: var(--nike-black);
-            color: white;
+
+        /* Login Modal Styles */
+        .modal-content {
+            border-radius: 8px;
             border: none;
-            border-radius: 0;
-            padding: 8px 15px;
-            font-weight: 500;
-            flex: 1;
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .btn-add-to-cart:hover {
-            background-color: #333;
-        }
-        
-        .btn-buy-now {
-            background-color: var(--nike-accent);
-            color: white;
-            border: none;
-            border-radius: 0;
-            padding: 8px 15px;
-            font-weight: 500;
-            flex: 1;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-buy-now:hover {
-            background-color: #e55a00;
-        }
-        
-        /* Cart Styles */
-        .cart-container {
-            background-color: var(--nike-light-gray);
-            padding: 20px;
-            height: 100%;
-        }
-        
-        .cart-item {
+
+        .modal-header {
+            border-bottom: none;
+            padding: 20px 30px 10px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #e5e5e5;
         }
-        
-        .cart-item-image {
+
+        .modal-logo {
             width: 60px;
             height: 60px;
+            border-radius: 50%;
             object-fit: cover;
-            margin-right: 15px;
+            margin-bottom: 15px;
         }
-        
-        .cart-item-details {
-            flex: 1;
-        }
-        
-        .cart-item-title {
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-        
-        .cart-item-price {
-            font-size: 0.9rem;
-            color: var(--nike-gray);
-        }
-        
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            margin-top: 5px;
-        }
-        
-        .quantity-btn {
-            background: none;
-            border: 1px solid #ddd;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: 1px solid #ddd;
-            height: 25px;
-            margin: 0 5px;
-        }
-        
-        .cart-total {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #ddd;
-        }
-        
-        .btn-checkout {
-            background-color: var(--nike-black);
-            color: white;
-            border: none;
-            border-radius: 0;
-            padding: 12px;
-            font-weight: 500;
-            width: 100%;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-checkout:hover {
-            background-color: #333;
-        }
-        
-        /* Nike-style Section Headers */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e5e5e5;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
+
+        .modal-title {
             font-weight: bold;
-            color: var(--nike-black);
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
         }
-        
-        .view-all {
+
+        .modal-subtitle {
+            text-align: center;
+            font-size: 0.9rem;
             color: var(--nike-gray);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .modal-body {
+            padding: 10px 30px 30px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 4px;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--nike-green);
+            box-shadow: 0 0 0 0.2rem rgba(12, 173, 58, 0.25);
+        }
+
+        .btn-login {
+            background-color: var(--nike-green);
+            border: none;
+            color: white;
+            font-weight: 500;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #0a9c32;
+        }
+
+        .form-check-label {
+            font-size: 0.9rem;
+        }
+
+        .forgot-password {
+            color: var(--nike-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: var(--nike-green);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
         }
-        
-        .view-all:hover {
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sign Up Modal Specific Styles */
+        .signup-header {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .signup-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--nike-gray);
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .dob-input-container {
+            position: relative;
+        }
+
+        .dob-input-container::after {
+            content: "📅";
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        /* Fix for mobile view */
+        @media (max-width: 991px) {
+            .mega-menu {
+                position: relative;
+                top: 0;
+                max-height: none;
+                padding: 15px;
+            }
+
+            .navbar .navbar-search input {
+                width: 150px;
+            }
+        }
+
+        /* Active nav link styling */
+        .nav-link.active {
+            color: var(--nike-accent) !important;
+        }
+
+        .nav-link.active::after {
+            width: 100% !important;
+            background-color: var(--nike-accent) !important;
+        }
+
+        /* Animation keyframes for pop-up effect */
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+
+            70% {
+                transform: translateY(5%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Fixed navbar button hover effects */
+        .navbar .btn-outline-dark {
             color: var(--nike-black);
+            border-color: var(--nike-black);
+            transition: all 0.3s ease;
         }
-        
-        @media (max-width: 767.98px) {
-            #menGrid .col-md-3,
-            #menGrid .col-md-6 {
-                flex: 0 0 100%;
-                max-width: 100%;
-            }
-            
-            .product-image {
-                height: 250px;
-            }
+
+        .navbar .btn-outline-dark:hover {
+            background-color: var(--nike-green);
+            border-color: var(--nike-green);
+            color: white !important;
+            transform: scale(1.05);
+        }
+
+        .navbar .btn-outline-dark:hover .bi {
+            color: white !important;
+        }
+
+        .navbar .btn-outline-dark .bi {
+            color: var(--nike-black);
+            transition: color 0.3s ease;
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/imageslogo.jpg') }}" alt="Shop Logo">
+                <img src="images/imageslogo.jpg" alt="Shop Logo">
             </a>
             <!-- Toggle button for small screens -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -413,12 +408,12 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 align-items-center">
-                    <li class="nav-item"><a class="nav-link active" href="#" id="menLink">Men</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Women</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Kids</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Shoes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sports</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Brand</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="menLink">Men</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="womenLink">Women</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="kidsLink">Kids</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="shoesLink">Shoes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="sportsLink">Sports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="brandLink">Brand</a></li>
                 </ul>
 
                 <div class="d-flex align-items-center flex-wrap">
@@ -429,24 +424,412 @@
                     <div class="navbar-buttons d-flex align-items-center flex-wrap">
                         <button class="btn btn-outline-dark me-2 mb-1" type="button"><i class="bi bi-bell"></i></button>
                         <button class="btn btn-outline-dark me-2 mb-1" type="button"><i class="bi bi-cart"></i></button>
-                        <button class="btn btn-outline-dark mb-1" type="button">Login</button>
+                        <button class="btn btn-outline-dark mb-1" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="images/imageslogo.jpg" alt="Balayan Smasher Logo" class="modal-logo">
+                    <h5 class="modal-title" id="loginModalLabel">Sign in to Balayan Smasher</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Keep me signed in</label>
+                        </div>
+                        <button type="submit" class="btn btn-login mb-3">Sign In</button>
+                        <div class="text-center">
+                            <a href="#" class="forgot-password">Forgot your password?</a>
+                        </div>
+                        <div class="signup-link">
+                            Not a member? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Join now</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="images/imageslogo.jpg" alt="Balayan Smasher Logo" class="modal-logo">
+                    <h5 class="modal-title" id="signupModalLabel">Sign up for Balayan Smasher</h5>
+                    <p class="signup-subtitle">Sign in for Balayan Smasher emails to see<br>event contents, news and exclusive promos</p>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="signupEmail" placeholder="Email Address">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Username">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dob" class="form-label">Date of Birth</label>
+                                <div class="dob-input-container">
+                                    <input type="text" class="form-control" id="dob" placeholder="08/20/2022">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-login">SIGN UP</button>
+                        </div>
+                        <div class="text-center small">
+                            By signing up, you agree to Balayan Smasher's <a href="#" class="text-decoration-none">Privacy Policy</a> and <a href="#" class="text-decoration-none">Terms of Use</a>.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mega Menus -->
+    <!-- Men Mega Menu -->
+    <div id="menGrid" class="mega-menu">
+        <div class="container">
+            <div class="row">
+                <!-- Featured -->
+                <div class="col-md-3">
+                    <h6>Featured</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">On Sale</a></li>
+                    </ul>
+                </div>
+                <!-- Clothing -->
+                <div class="col-md-3">
+                    <h6>Clothing</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Jersey</a></li>
+                        <li><a href="#">Polo Shirts</a></li>
+                        <li><a href="#">Jackets</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Socks</a></li>
+                    </ul>
+                </div>
+                <!-- Shop by Sports -->
+                <div class="col-md-3">
+                    <h6>Shop by Sports</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Badminton</a></li>
+                        <li><a href="#">Baseball</a></li>
+                        <li><a href="#">Tennis</a></li>
+                        <li><a href="#">Swimming</a></li>
+                        <li><a href="#">Football</a></li>
+                    </ul>
+                </div>
+                <!-- Accessories -->
+                <div class="col-md-3">
+                    <h6>Accessories & Equipment</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Helmets</a></li>
+                        <li><a href="#">Goggles</a></li>
+                        <li><a href="#">Water Bottles</a></li>
+                        <li><a href="#">Bags</a></li>
+                        <li><a href="#">Rackets</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Women Mega Menu -->
+    <div id="womenGrid" class="mega-menu">
+        <div class="container">
+            <div class="row">
+                <!-- Featured -->
+                <div class="col-md-3">
+                    <h6>Featured</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">On Sale</a></li>
+                    </ul>
+                </div>
+                <!-- Clothing -->
+                <div class="col-md-3">
+                    <h6>Clothing</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Sports Bras</a></li>
+                        <li><a href="#">Leggings</a></li>
+                        <li><a href="#">Tank Tops</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Jackets</a></li>
+                    </ul>
+                </div>
+                <!-- Shop by Sports -->
+                <div class="col-md-3">
+                    <h6>Shop by Sports</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Yoga</a></li>
+                        <li><a href="#">Running</a></li>
+                        <li><a href="#">Tennis</a></li>
+                        <li><a href="#">Swimming</a></li>
+                        <li><a href="#">Gym & Training</a></li>
+                    </ul>
+                </div>
+                <!-- Accessories -->
+                <div class="col-md-3">
+                    <h6>Accessories</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Headbands</a></li>
+                        <li><a href="#">Yoga Mats</a></li>
+                        <li><a href="#">Water Bottles</a></li>
+                        <li><a href="#">Bags</a></li>
+                        <li><a href="#">Hair Accessories</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kids Mega Menu -->
+    <div id="kidsGrid" class="mega-menu">
+        <div class="container">
+            <div class="row">
+                <!-- Featured -->
+                <div class="col-md-3">
+                    <h6>Featured</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">On Sale</a></li>
+                    </ul>
+                </div>
+                <!-- Clothing -->
+                <div class="col-md-3">
+                    <h6>Clothing</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">T-Shirts</a></li>
+                        <li><a href="#">Shorts</a></li>
+                        <li><a href="#">Jackets</a></li>
+                        <li><a href="#">Socks</a></li>
+                        <li><a href="#">Swimwear</a></li>
+                    </ul>
+                </div>
+                <!-- Shop by Sports -->
+                <div class="col-md-3">
+                    <h6>Shop by Sports</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Soccer</a></li>
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Swimming</a></li>
+                        <li><a href="#">Dance</a></li>
+                        <li><a href="#">Gymnastics</a></li>
+                    </ul>
+                </div>
+                <!-- Accessories -->
+                <div class="col-md-3">
+                    <h6>Accessories</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Backpacks</a></li>
+                        <li><a href="#">Water Bottles</a></li>
+                        <li><a href="#">Hats</a></li>
+                        <li><a href="#">Balls</a></li>
+                        <li><a href="#">Protective Gear</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shoes Mega Menu -->
+    <div id="shoesGrid" class="mega-menu">
+        <div class="container">
+            <div class="row">
+                <!-- Featured -->
+                <div class="col-md-3">
+                    <h6>Featured</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">On Sale</a></li>
+                    </ul>
+                </div>
+                <!-- By Sport -->
+                <div class="col-md-3">
+                    <h6>By Sport</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Running</a></li>
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Soccer</a></li>
+                        <li><a href="#">Tennis</a></li>
+                        <li><a href="#">Training</a></li>
+                    </ul>
+                </div>
+                <!-- By Type -->
+                <div class="col-md-3">
+                    <h6>By Type</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Lifestyle</a></li>
+                        <li><a href="#">Athletic</a></li>
+                        <li><a href="#">Sandals</a></li>
+                        <li><a href="#">Cleats</a></li>
+                        <li><a href="#">Slip-ons</a></li>
+                    </ul>
+                </div>
+                <!-- Accessories -->
+                <div class="col-md-3">
+                    <h6>Shoe Care</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Shoe Cleaners</a></li>
+                        <li><a href="#">Shoe Laces</a></li>
+                        <li><a href="#">Insoles</a></li>
+                        <li><a href="#">Shoe Bags</a></li>
+                        <li><a href="#">Storage</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sports Mega Menu -->
+    <div id="sportsGrid" class="mega-menu">
+        <div class="container">
+            <div class="row">
+                <!-- Featured -->
+                <div class="col-md-3">
+                    <h6>Featured</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">On Sale</a></li>
+                    </ul>
+                </div>
+                <!-- Team Sports -->
+                <div class="col-md-3">
+                    <h6>Team Sports</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Soccer</a></li>
+                        <li><a href="#">Baseball</a></li>
+                        <li><a href="#">Volleyball</a></li>
+                        <li><a href="#">Football</a></li>
+                    </ul>
+                </div>
+                <!-- Individual Sports -->
+                <div class="col-md-3">
+                    <h6>Individual Sports</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Tennis</a></li>
+                        <li><a href="#">Badminton</a></li>
+                        <li><a href="#">Swimming</a></li>
+                        <li><a href="#">Running</a></li>
+                        <li><a href="#">Golf</a></li>
+                    </ul>
+                </div>
+                <!-- Equipment -->
+                <div class="col-md-3">
+                    <h6>Equipment</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Balls</a></li>
+                        <li><a href="#">Rackets</a></li>
+                        <li><a href="#">Nets</a></li>
+                        <li><a href="#">Goals</a></li>
+                        <li><a href="#">Training Aids</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brand Mega Menu -->
+    <div id="brandGrid" class="mega-menu">
+        <div class="container">
+            <div class="row">
+                <!-- Featured -->
+                <div class="col-md-3">
+                    <h6>Featured</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">On Sale</a></li>
+                    </ul>
+                </div>
+                <!-- Popular Brands -->
+                <div class="col-md-3">
+                    <h6>Popular Brands</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Nike</a></li>
+                        <li><a href="#">Adidas</a></li>
+                        <li><a href="#">Under Armour</a></li>
+                        <li><a href="#">Puma</a></li>
+                        <li><a href="#">Reebok</a></li>
+                    </ul>
+                </div>
+                <!-- Sports Brands -->
+                <div class="col-md-3">
+                    <h6>Sports Brands</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Wilson</a></li>
+                        <li><a href="#">Spalding</a></li>
+                        <li><a href="#">Mikasa</a></li>
+                        <li><a href="#">Molten</a></li>
+                        <li><a href="#">Yonex</a></li>
+                    </ul>
+                </div>
+                <!-- Accessory Brands -->
+                <div class="col-md-3">
+                    <h6>Accessory Brands</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Gatorade</a></li>
+                        <li><a href="#">CamelBak</a></li>
+                        <li><a href="#">Speedo</a></li>
+                        <li><a href="#">Oakley</a></li>
+                        <li><a href="#">Nike</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Carousel -->
     <div id="carouselWithControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('images/racket3.jpg') }}" class="d-block w-100" alt="slide 1">
+                <img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t39.30808-6/528606912_122164303472392515_5841549823835529491_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFFAWIZnSqRpTbPixURpsqDSns-POsxGJxKez486zEYnGvMfF8VCSg8kEGVEN1howQ6hdsh2RDECho6-0LTrY5S&_nc_ohc=poHtimc2iGUQ7kNvwEIIMAp&_nc_oc=Adlz1xuc17CliQtiXIgEFjfzFrkSrXEsO5ApP6kUr8LXhsCAS1M5pHQlk-i9pIfhRal_4HXQ8pFWVvnXIYEnRBzr&_nc_zt=23&_nc_ht=scontent.fmnl4-6.fna&_nc_gid=QlTnjreu_0U1R88ux0PkgQ&oh=00_AfZuOblxR7hIIUuHJV5982K87H19eF3NBU3bEvNOG1NL1g&oe=68E3D3CA" class="d-block w-100" alt="slide 1">
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('images/soccer.jpg') }}" class="d-block w-100" alt="Slide 2">
+                <img src="https://scontent.fmnl4-2.fna.fbcdn.net/v/t39.30808-6/528596440_122164303460392515_8277941324246145087_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFXqBwj0tY1RXQWW7WJa430jOpjAIOSxp6M6mMAg5LGnkAUlR66XvWdLaNf5-6VUDdMHKepPaS2HsOjHcreBxCs&_nc_ohc=hTQ38Yy1trsQ7kNvwE2MQMH&_nc_oc=AdnINgM34M2ll0tsaeDWJk-h2esbZJUsg8uTUrE_ynmVeTr9jKiPMBtBlwZPpaqht-DpLD1p8pQXKlYwQinozp-o&_nc_zt=23&_nc_ht=scontent.fmnl4-2.fna&_nc_gid=L70z39wME-40swWoSnS2Gg&oh=00_AfaAV283GBTc6UH4rCtotdswxEmMT5FoBIptMEB_gnO_ag&oe=68E3FC97" class="d-block w-100" alt="Slide 2">
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('images/basketball.jpg') }}" class="d-block w-100" alt="Slide 3">
+                <img src="https://scontent.fmnl4-6.fna.fbcdn.net/v/t39.30808-6/528838596_122164303412392515_4812172137027919004_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHty2JmJsi1CBUcREKzExen35sO0CxiM8zfmw7QLGIzzLsEg7j40FodPrDDRvyxsRkA-tOlRg0GjjKqEdpkoueY&_nc_ohc=-HfTWhRxPHQQ7kNvwGi45qH&_nc_oc=Adm96p7rWplRBnCvTyHs1dTDtovDHnRoTxb24erQEAJNuETrU3PjeLh5D1Eo82uLywxB_nlc1K-ipHf4UZzEUBE9&_nc_zt=23&_nc_ht=scontent.fmnl4-6.fna&_nc_gid=nOhVtvCvylqMQHk8MGiXOQ&oh=00_AfZcOcqPIJ7YmQFdXOzF11prvc4at9TgbvCzwWHJqp0hxQ&oe=68E4041D" class="d-block w-100" alt="Slide 3">
             </div>
         </div>
 
@@ -464,278 +847,117 @@
         </div>
     </div>
 
-    <!-- Men Grid -->
-    <div id="menGrid">
-        <div class="container-fluid h-100 p-0">
-            <!-- Category Navigation -->
-            <div class="category-nav">
-                <div class="container">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-category="featured">Featured</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="tops">Tops & Popular</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="hoodies">Shoes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="jackets">Ball</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="trousers">Socks</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-category="shorts">Shorts</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Main Content -->
-            <div class="container-fluid h-100 py-3">
-                <div class="row h-100 g-0">
-                    <!-- Middle Column: Products -->
-                    <div class="col-md-9 p-4">
-                        <div class="section-header">
-                            <h2 class="section-title">Men's Product</h2>
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                        
-                        <div class="product-grid">
-                            <div class="row g-4" id="productList">
-                                <!-- Products will be dynamically inserted here -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Cart / Receipt -->
-                    <div class="col-md-3 p-0">
-                        <div class="cart-container">
-                            <h5 class="mb-4">Your Cart</h5>
-                            <div id="cartItems">
-                                <p class="text-muted">Your cart is empty</p>
-                            </div>
-                            <div class="cart-total">
-                                <div class="d-flex justify-content-between">
-                                    <span>Subtotal:</span>
-                                    <span>₱<span id="subtotalAmount">0</span></span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span>Shipping:</span>
-                                    <span>₱<span id="shippingAmount">0</span></span>
-                                </div>
-                                <hr>
-                                <div class="d-flex justify-content-between fw-bold">
-                                    <span>Total:</span>
-                                    <span>₱<span id="totalAmount">0</span></span>
-                                </div>
-                            </div>
-                            <button class="btn-checkout" id="checkoutBtn">Checkout</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
-        const menLink = document.getElementById('menLink');
-        const menGrid = document.getElementById('menGrid');
+        // Get all navigation links and mega menus
+        const navLinks = {
+            menLink: document.getElementById('menLink'),
+            womenLink: document.getElementById('womenLink'),
+            kidsLink: document.getElementById('kidsLink'),
+            shoesLink: document.getElementById('shoesLink'),
+            sportsLink: document.getElementById('sportsLink'),
+            brandLink: document.getElementById('brandLink')
+        };
+
+        const megaMenus = {
+            menGrid: document.getElementById('menGrid'),
+            womenGrid: document.getElementById('womenGrid'),
+            kidsGrid: document.getElementById('kidsGrid'),
+            shoesGrid: document.getElementById('shoesGrid'),
+            sportsGrid: document.getElementById('sportsGrid'),
+            brandGrid: document.getElementById('brandGrid')
+        };
+
         const navbar = document.querySelector('.navbar');
         const navbarCollapse = document.getElementById('navbarNav');
 
-        function adjustMenGridHeight() {
+        // Function to adjust mega menu position
+        function adjustMegaMenuHeight() {
             const navbarHeight = navbar.offsetHeight;
-            menGrid.style.top = navbarHeight + 'px';
-            menGrid.style.height = `calc(100vh - ${navbarHeight}px)`;
-        }
-
-        window.addEventListener('resize', adjustMenGridHeight);
-        window.addEventListener('load', adjustMenGridHeight);
-
-        navbarCollapse.addEventListener('shown.bs.collapse', adjustMenGridHeight);
-        navbarCollapse.addEventListener('hidden.bs.collapse', adjustMenGridHeight);
-
-        menLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            menGrid.style.display = menGrid.style.display === 'block' ? 'none' : 'block';
-            adjustMenGridHeight();
-        });
-
-        // Sample products data
-        const products = {
-            featured: [
-                { id: 1, name: "T-Shirt", brand: "Nike", price: 1395, img: 'https://i.pinimg.com/736x/47/58/40/47584018b36967339e18beb6e3038988.jpg', badge: "Just In" },
-                { id: 2, name: "Volleyball", brand: "Nike", price: 1395, img: 'https://i.pinimg.com/736x/99/70/5c/99705c8917ee99d59a752847b1560574.jpg', badge: "Popular" },
-                { id: 3, name: "Running shoes", brand: "Nike", price: 1395, img: 'https://i.pinimg.com/736x/bd/3f/cf/bd3fcf927d762cf6fc3f157c2cb80c38.jpg', badge: null },
-                { id: 4, name: "Shoes", brand: "Nike", price: 2495, img: 'https://i.pinimg.com/736x/cf/7b/1a/cf7b1aa2bc1a968a86d7bfd0809fc1bf.jpg', badge: "Best Seller" },
-                { id: 5, name: "Socks", brand: "Nike", price: 4995, img: 'https://i.pinimg.com/736x/55/9e/ee/559eeef6061e2e3dca91b03df64ef565.jpg', badge: null },
-                { id: 6, name: "High Socks", brand: "Nike", price: 1195, img: 'https://i.pinimg.com/736x/b7/ae/14/b7ae1421e7b2feadd378e4ed3207c454.jpg', badge: "Sale" }
-            ],
-            tops: [
-                { id: 7, name: "Dri-FIT UV Miler", brand: "Nike", price: 1595, img: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: null },
-                { id: 8, name: "Sportswear Tech Fleece", brand: "Nike", price: 3495, img: 'https://images.unsplash.com/photo-1588117305388-c2631a279f82?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: "New" }
-            ],
-            hoodies: [
-                { id: 9, name: "Club Fleece Pullover", brand: "Nike", price: 3495, img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: null },
-                { id: 10, name: "Sportswear Phoenix Fleece", brand: "Nike", price: 3995, img: 'https://images.unsplash.com/photo-1578763460786-9e50ef5d5e0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: "Just In" }
-            ],
-            jackets: [
-                { id: 11, name: "Sportswear Windrunner", brand: "Nike", price: 4995, img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: null },
-                { id: 12, name: "ACG Storm-FIT Adv", brand: "Nike", price: 12995, img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: "Premium" }
-            ],
-            trousers: [
-                { id: 13, name: "Dri-FIT Run Division", brand: "Nike", price: 2995, img: 'https://images.unsplash.com/photo-1542272456-9c003991a6d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: null },
-                { id: 14, name: "Sportswear Club Fleece", brand: "Nike", price: 3495, img: 'https://images.unsplash.com/photo-1542272456-9c003991a6d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: "Popular" }
-            ],
-            shorts: [
-                { id: 15, name: "Dri-FIT Run Division", brand: "Nike", price: 2495, img: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: null },
-                { id: 16, name: "Sportswear Club Fleece", brand: "Nike", price: 1995, img: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', badge: "Sale" }
-            ]
-        };
-
-        let cart = [];
-        const productList = document.getElementById('productList');
-        const cartItems = document.getElementById('cartItems');
-        const subtotalAmount = document.getElementById('subtotalAmount');
-        const shippingAmount = document.getElementById('shippingAmount');
-        const totalAmount = document.getElementById('totalAmount');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-
-        function showProducts(category) {
-            productList.innerHTML = '';
-            products[category].forEach(product => {
-                const col = document.createElement('div');
-                col.className = 'col-md-4 col-sm-6';
-                col.innerHTML = `
-                    <div class="product-card">
-                        <div class="product-image-container">
-                            <img src="${product.img}" alt="${product.name}" class="product-image">
-                            ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
-                        </div>
-                        <div class="product-info">
-                            <div class="product-brand">${product.brand}</div>
-                            <div class="product-title">${product.name}</div>
-                            <div class="product-price">₱${product.price}</div>
-                            <div class="product-actions">
-                                <button class="btn-add-to-cart" data-id="${product.id}">Add to Cart</button>
-                                <button class="btn-buy-now" data-id="${product.id}">Buy Now</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                productList.appendChild(col);
-
-                const addBtn = col.querySelector('.btn-add-to-cart');
-                const buyBtn = col.querySelector('.btn-buy-now');
-
-                addBtn.addEventListener('click', () => addToCart(product));
-                buyBtn.addEventListener('click', () => {
-                    addToCart(product);
-                    alert(`Purchased ${product.brand} ${product.name}`);
-                });
+            Object.values(megaMenus).forEach(menu => {
+                menu.style.top = navbarHeight + 'px';
             });
         }
 
-        function addToCart(product) {
-            const existing = cart.find(item => item.id === product.id);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ 
-                    ...product, 
-                    quantity: 1 
-                });
-            }
-            updateCart();
-        }
-
-        function updateCart() {
-            cartItems.innerHTML = '';
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-muted">Your cart is empty</p>';
-                subtotalAmount.textContent = '0';
-                shippingAmount.textContent = '0';
-                totalAmount.textContent = '0';
-                checkoutBtn.disabled = true;
-                checkoutBtn.style.opacity = '0.7';
-                return;
-            }
-            
-            let subtotal = 0;
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
-                
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <img src="${item.img}" alt="${item.name}" class="cart-item-image">
-                    <div class="cart-item-details">
-                        <div class="cart-item-title">${item.brand} ${item.name}</div>
-                        <div class="cart-item-price">₱${item.price}</div>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
-                            <input type="text" class="quantity-input" value="${item.quantity}" readonly>
-                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
-                        </div>
-                    </div>
-                `;
-                cartItems.appendChild(cartItem);
-                
-                const minusBtn = cartItem.querySelector('.minus');
-                const plusBtn = cartItem.querySelector('.plus');
-                
-                minusBtn.addEventListener('click', () => updateQuantity(item.id, -1));
-                plusBtn.addEventListener('click', () => updateQuantity(item.id, 1));
+        // Function to close all mega menus
+        function closeAllMegaMenus() {
+            Object.values(megaMenus).forEach(menu => {
+                menu.style.display = 'none';
             });
-            
-            const shipping = subtotal > 0 ? 150 : 0;
-            const total = subtotal + shipping;
-            
-            subtotalAmount.textContent = subtotal.toLocaleString();
-            shippingAmount.textContent = shipping.toLocaleString();
-            totalAmount.textContent = total.toLocaleString();
-            
-            checkoutBtn.disabled = false;
-            checkoutBtn.style.opacity = '1';
+            Object.values(navLinks).forEach(link => {
+                link.classList.remove('active');
+                link.classList.remove('clicked');
+            });
         }
 
-        function updateQuantity(productId, change) {
-            const item = cart.find(item => item.id === productId);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    cart = cart.filter(i => i.id !== productId);
-                }
-                updateCart();
+        // Function to toggle a specific mega menu
+        function toggleMegaMenu(linkId, menuId) {
+            const isVisible = megaMenus[menuId].style.display === 'block';
+
+            // Close all menus first
+            closeAllMegaMenus();
+
+            // If the clicked menu wasn't visible, show it
+            if (!isVisible) {
+                megaMenus[menuId].style.display = 'block';
+                navLinks[linkId].classList.add('active');
+                navLinks[linkId].classList.add('clicked');
+                adjustMegaMenuHeight();
+
+                // Remove the clicked class after animation completes
+                setTimeout(() => {
+                    navLinks[linkId].classList.remove('clicked');
+                }, 300);
             }
         }
 
-        // Category navigation
-        document.querySelectorAll('.category-nav .nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
+        // Add event listeners to all navigation links
+        Object.keys(navLinks).forEach(linkId => {
+            const menuId = linkId.replace('Link', 'Grid');
+            navLinks[linkId].addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelectorAll('.category-nav .nav-link').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                showProducts(link.dataset.category);
+                e.stopPropagation();
+                toggleMegaMenu(linkId, menuId);
             });
         });
 
-        // Checkout button
-        checkoutBtn.addEventListener('click', () => {
-            if (cart.length > 0) {
-                alert('Proceeding to checkout!');
-                // In a real application, you would redirect to a checkout page
+        // Close mega menus when clicking outside
+        document.addEventListener('click', function(event) {
+            let isClickInsideMegaMenu = false;
+            Object.values(megaMenus).forEach(menu => {
+                if (menu.contains(event.target)) {
+                    isClickInsideMegaMenu = true;
+                }
+            });
+
+            let isClickInsideNavLink = false;
+            Object.values(navLinks).forEach(link => {
+                if (link.contains(event.target)) {
+                    isClickInsideNavLink = true;
+                }
+            });
+
+            if (!isClickInsideMegaMenu && !isClickInsideNavLink) {
+                closeAllMegaMenus();
             }
         });
 
-        // Initialize with featured products
-        showProducts('featured');
+        // Adjust menu position on window resize and load
+        window.addEventListener('resize', adjustMegaMenuHeight);
+        window.addEventListener('load', adjustMegaMenuHeight);
+
+        // Adjust menu position when navbar is toggled (mobile)
+        navbarCollapse.addEventListener('shown.bs.collapse', adjustMegaMenuHeight);
+        navbarCollapse.addEventListener('hidden.bs.collapse', adjustMegaMenuHeight);
+
+        // Close on window resize for mobile
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 992) {
+                closeAllMegaMenus();
+            }
+        });
     </script>
 </body>
+
 </html>
